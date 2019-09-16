@@ -1,0 +1,10 @@
+.container {
+    margin: auto;
+    text-align: center;
+}
+
+.character-line {
+    width: 20px;
+    margin-left: 20px;
+    font-size: 40px;
+}
