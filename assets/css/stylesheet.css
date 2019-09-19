@@ -8,3 +8,8 @@
     margin-left: 20px;
     font-size: 40px;
 }
+body {
+    background-image: url(../images/New_Borderlands_Header.jpg);
+    margin:0;
+    opacity: 50%;
+}

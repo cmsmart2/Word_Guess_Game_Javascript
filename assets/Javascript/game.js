@@ -1,24 +1,25 @@
 //variables
-var wordChoices = ["claptrap", "pandora", "siren", "handsome jack", "sanctuary", "mechromancer", "catch a ride", "angel", "bandits"]
-var guessLeft = 10
+var wordChoices = ["claptrap", "pandora", "siren", "sanctuary", "mechromancer","angel", "bandits"]
 var wins =0
-var guessedLetters
+var guessedLetter
 var randomSelection
 var correctCharacter = 0;
 var correctGuess
+var guessLeft = 10
 
 randomWord();
 
 
 //determines what happens on click
-document.onkeyup = function(event) {
+document.onkeyup = function(event) {    
+//splits randomly selected word into an array of letters
     var characterArray = randomSelection.split('');
     console.log(characterArray);
     var keyPressed = event.key.toLowerCase();
     console.log(keyPressed);
-
+// loop through the random word
     for (i=0; i<characterArray.length; i++){
-    
+ // adds pressed key to line if it is a correct letter   
      if (keyPressed === characterArray[i]){
          var matchingLetter = document.getElementById('line-' + i);
          matchingLetter.innerHTML = keyPressed;
@@ -26,15 +27,35 @@ document.onkeyup = function(event) {
         correctCharacter++;
         var correctGuess = true
      } 
+     else if (keyPressed != characterArray[i]) {
+        var guessedLetter = document.getElementById('guessedLetter');
+        guessedLetter.innerHTML = keyPressed;
+     }
+    
 
     }
 
     if (correctGuess != true){
+        
         //if guessed previously don't decrement add to array of guessed letters 
         guessLeft--;
-        console.log(guessLeft)
+        console.log(guessLeft)  
+        var loseTally = document.getElementById('guessesLeft');
+        loseTally.innerHTML = guessLeft; 
+
+//resets the game if 0 guess left
+        if (guessLeft === 0){
+        guessLeft=10
+        console.log("lose")
+        var d1 = document.getElementById('randomWord');
+        d1.innerHTML = "";
+        randomWord();
+        }
+       
     }
+    
     console.log(correctCharacter);
+//detemine if you win    
     if(correctCharacter === characterArray.length){
         correctCharacter = 0;
         console.log('win');
@@ -45,9 +66,6 @@ document.onkeyup = function(event) {
         var winTally = document.getElementById('wins');
         winTally.innerHTML = wins;
     }
-//if (isAlpha(event.key)) {
-//    checkForLetter(event.key.toLowerCase())
-//}
 
     correctGuess = false;
 }
@@ -64,5 +82,5 @@ function randomWord() {
     }
 }
 
-//string.split (split each word in an array into it's own array loop through to see if the letter typed is in that array)
+
 
