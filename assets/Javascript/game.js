@@ -1,13 +1,15 @@
 //variables
 var wordChoices = ["claptrap", "pandora", "siren", "sanctuary", "mechromancer","angel", "bandits"]
 var wins =0
-var guessedLetter
+var guessedLetter 
 var randomSelection
 var correctCharacter = 0;
 var correctGuess
 var guessLeft = 10
-
+var letters =[] 
 randomWord();
+
+
 
 
 //determines what happens on click
@@ -16,9 +18,12 @@ document.onkeyup = function(event) {
     var characterArray = randomSelection.split('');
     console.log(characterArray);
     var keyPressed = event.key.toLowerCase();
-    console.log(keyPressed);
+    console.log(keyPressed); 
+    
 // loop through the random word
+
     for (i=0; i<characterArray.length; i++){
+        
  // adds pressed key to line if it is a correct letter   
      if (keyPressed === characterArray[i]){
          var matchingLetter = document.getElementById('line-' + i);
@@ -27,30 +32,34 @@ document.onkeyup = function(event) {
         correctCharacter++;
         var correctGuess = true
      } 
-     else if (keyPressed != characterArray[i]) {
-        var guessedLetter = document.getElementById('guessedLetter');
-        guessedLetter.innerHTML = keyPressed;
-     }
-    
-
     }
-
     if (correctGuess != true){
-        
-        //if guessed previously don't decrement add to array of guessed letters 
+// decreases number of guesses
         guessLeft--;
         console.log(guessLeft)  
         var loseTally = document.getElementById('guessesLeft');
         loseTally.innerHTML = guessLeft; 
+
+// adds letter to guessed letters list
+
+        guessedLetter = document.getElementById('guessedLetter');
+        letters.push(keyPressed);
+        guessedLetter.innerHTML = letters
+        console.log(letters)
+
 
 //resets the game if 0 guess left
         if (guessLeft === 0){
         guessLeft=10
         console.log("lose")
         var d1 = document.getElementById('randomWord');
+        guessedLetter.innerHTML = "";
+        empty ()
         d1.innerHTML = "";
         randomWord();
+        empty();
         }
+      
        
     }
     
@@ -65,9 +74,12 @@ document.onkeyup = function(event) {
         randomWord();
         var winTally = document.getElementById('wins');
         winTally.innerHTML = wins;
+        empty();
     }
 
     correctGuess = false;
+   
+        
 }
 
 function randomWord() {
@@ -80,6 +92,15 @@ function randomWord() {
         var d1 = document.getElementById('randomWord');
         d1.insertAdjacentHTML('beforeend', '<span id="line-' + i + '" class="character-line">_</span>');
     }
+}
+
+function empty() {
+    letters.length =0;
+}
+
+function draw() {
+ 
+
 }
 
 
