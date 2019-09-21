@@ -98,10 +98,6 @@ function empty() {
     letters.length =0;
 }
 
-function draw() {
- 
-
-}
 
 
 
